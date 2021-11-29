@@ -12,8 +12,28 @@ const db = mysql.createConnection(
 );
 
 
+// QUERIES
 
-// DEPARTMENTS QUERIES
+// 0 View All Departments
+function viewDepartments() {
+    db.query(`SELECT * FROM departments`, (err, rows) => {
+        if (err) {
+            return (console.log(err));
+        }
+        return (console.table(rows));
+    });
+};
+
+// 1 View All Roles
+function viewRoles() {
+    db.query(`SELECT * FROM roles`, (err, rows) => {
+        if (err) {
+            console.log(err);
+        }
+        console.table(rows);
+    });
+};
+
 // create a department
 function createDepartment() {
     const sql = `INSERT INTO departments (id, name)
@@ -28,28 +48,6 @@ function createDepartment() {
     });
 };
 
-// view all departments
-function viewDepartments() {
-    db.query(`SELECT * FROM departments`, (err, rows) => {
-        if (err) {
-            console.log(err);
-        }
-        console.table(rows);
-    });
-};
-
-// view a single department
-function viewSingleDepartment() {
-    const sql = `SELECT * FROM departments WHERE id = ?`;
-    const params = [req.params.id];
-
-    db.query(sql, params, (err, row) => {
-        if (err) {
-            console.log(err);
-        }
-        console.table(row);
-    });
-};
 
 // delete a department
 function deleteDepartment() {
@@ -67,15 +65,7 @@ function deleteDepartment() {
 
 
 // ROLE QUERIES
-// view all roles
-function viewRoles() {
-    db.query(`SELECT * FROM roles`, (err, rows) => {
-        if (err) {
-            console.log(err);
-        }
-        console.table(rows);
-    });
-};
+
 
 
 
@@ -88,3 +78,7 @@ function viewEmployees() {
         console.table(rows);
     });
 };
+
+
+
+module.exports = viewDepartments;

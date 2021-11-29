@@ -1,5 +1,6 @@
 // MODULES
 const inquirer = require('inquirer');
+const viewDepartments = require('./utils/queries');
 
 function initializeApp() {
     console.log(
@@ -26,10 +27,10 @@ function initializeApp() {
         |_|_|_|__,|_|_|__,|_  |___|_|_|_|___|_|_|_|    |_____|_  |___|_| |___|_|_|_|
                           |___|                              |___|                  
 `);
-    promptData();
+    promptMenu();
 };
 
-function promptData() {
+function promptMenu() {
     return inquirer
         .prompt([{
             type: 'list',
@@ -52,11 +53,11 @@ function promptData() {
                 value: 3
             },
             {
-                name: 'View Employees by Manager',
+                name: 'View Employees by Manager.',
                 value: 4
             },
             {
-                name: 'Update Employee Manager',
+                name: 'Update Employee Manager.',
                 value: 5
             },
             {
@@ -84,15 +85,20 @@ function promptData() {
                 value: 11
             },
             {
-                name: 'Delete an Employee',
+                name: 'Delete an Employee.',
                 value: 12
             },
             {
-                name: 'View Total Utilized Budget',
+                name: 'View Total Utilized Budget.',
                 value: 13
             }]
         }])
-    //.then
+        .then(answers => {
+            if (answers.menu === 0) {
+                viewDepartments();
+            }
+        })
+    //.then(promptMenu)
 };
 
 initializeApp();
