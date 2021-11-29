@@ -11,12 +11,14 @@ const db = mysql.createConnection(
     }
 );
 
+
+
 // DEPARTMENTS QUERIES
 // create a department
 function createDepartment() {
     const sql = `INSERT INTO departments (id, name)
                 VALUES (?, ?)`;
-    const params = [data here];
+    //const params = [data here];
 
     db.query(sql, params, (err, result) => {
         if (err) {
@@ -55,9 +57,34 @@ function deleteDepartment() {
     const params = [req.params.id];
 
     db.query(sql, params, (err, result) => {
-        if(err) {
+        if (err) {
             console.log(err);
         }
         console.table(result);
+    });
+};
+
+
+
+// ROLE QUERIES
+// view all roles
+function viewRoles() {
+    db.query(`SELECT * FROM roles`, (err, rows) => {
+        if (err) {
+            console.log(err);
+        }
+        console.table(rows);
+    });
+};
+
+
+
+// EMPLOYEE QUERIES
+function viewEmployees() {
+    db.query(`SELECT * FROM employees`, (err, rows) => {
+        if (err) {
+            console.log(err);
+        }
+        console.table(rows);
     });
 };
