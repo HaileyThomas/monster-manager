@@ -16,11 +16,13 @@ const db = mysql.createConnection(
 
 // 0 View All Departments
 function viewDepartments() {
-    db.query(`SELECT * FROM departments`, (err, rows) => {
+    db.query(`
+
+    SELECT * FROM departments`, (err, rows) => {
         if (err) {
             return (console.log(err));
         }
-        return (console.table(rows));
+        return (console.table('Departments', rows));
     });
 };
 

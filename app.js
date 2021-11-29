@@ -96,9 +96,36 @@ function promptMenu() {
         .then(answers => {
             if (answers.menu === 0) {
                 viewDepartments();
+                confirmNew();
             }
         })
-    //.then(promptMenu)
+    //.then(confirmNew)
+};
+
+function confirmNew() {
+    return inquirer
+        .prompt([{
+            type: 'list',
+            name: 'confirm',
+            message: 'Would you like to continue?',
+            choices: [{
+                name: 'Yes.',
+                value: 0
+            },
+            {
+                name: 'No.',
+                value: 1
+            }]
+        }])
+        .then(answer => {
+            if (answer.confirm === 0) {
+                promptMenu();
+            }
+            if (answer.confirm === 1) {
+                console.log('Thank you! Remember "We Scare Because We Care!"');
+                process.exit();
+            }
+        })
 };
 
 initializeApp();
