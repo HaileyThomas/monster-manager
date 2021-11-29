@@ -48,20 +48,48 @@ function promptData() {
                 value: 2
             },
             {
-                name: 'Add a Department.',
+                name: 'View Employees by Department.',
                 value: 3
             },
             {
-                name: 'Add a Role.',
+                name: 'View Employees by Manager',
                 value: 4
             },
             {
-                name: 'Add an Employee.',
+                name: 'Update Employee Manager',
                 value: 5
             },
             {
-                name: 'Create an Employee Role.',
+                name: 'Add a Department.',
                 value: 6
+            },
+            {
+                name: 'Add a Role.',
+                value: 7
+            },
+            {
+                name: 'Add an Employee.',
+                value: 8
+            },
+            {
+                name: 'Update an Employee Role.',
+                value: 9
+            },
+            {
+                name: 'Delete a Department.',
+                value: 10
+            },
+            {
+                name: 'Delete a Role.',
+                value: 11
+            },
+            {
+                name: 'Delete an Employee',
+                value: 12
+            },
+            {
+                name: 'View Total Utilized Budget',
+                value: 13
             }]
         }])
     //.then
