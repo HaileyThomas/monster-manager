@@ -36,6 +36,24 @@ function viewRoles() {
     });
 };
 
+// 2 View All Employees
+function viewEmployees() {
+    db.query(`SELECT employees.id, employees.first_name, employees.last_name, roles.title AS role_title, departments.name AS department_name, roles.salary, employees.manager_id
+            FROM employees
+            INNER JOIN roles
+            ON employees.role_id = roles.id
+            INNER JOIN departments
+            ON roles.department_id = departments.id;`, (err, rows) => {
+        if (err) {
+            console.log(err);
+        }
+        console.table('Employees', rows);
+    });
+};
+
+
+
+
 // create a department
 function createDepartment() {
     const sql = `INSERT INTO departments (id, name)
@@ -66,21 +84,6 @@ function deleteDepartment() {
 
 
 
-// ROLE QUERIES
 
 
-
-
-// EMPLOYEE QUERIES
-function viewEmployees() {
-    db.query(`SELECT * FROM employees`, (err, rows) => {
-        if (err) {
-            console.log(err);
-        }
-        console.table(rows);
-    });
-};
-
-
-
-module.exports = { viewDepartments, viewRoles };
+module.exports = { viewDepartments, viewRoles, viewEmployees };
