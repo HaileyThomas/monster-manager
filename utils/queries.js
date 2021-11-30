@@ -13,12 +13,9 @@ const db = mysql.createConnection(
 
 
 // QUERIES
-
 // 0 View All Departments
 function viewDepartments() {
-    db.query(`
-
-    SELECT * FROM departments`, (err, rows) => {
+    db.query(`SELECT * FROM departments`, (err, rows) => {
         if (err) {
             return (console.log(err));
         }
@@ -28,11 +25,14 @@ function viewDepartments() {
 
 // 1 View All Roles
 function viewRoles() {
-    db.query(`SELECT * FROM roles`, (err, rows) => {
+    db.query(`SELECT roles.id, roles.title, departments.name AS department_name, roles.salary
+            FROM roles
+            INNER JOIN departments
+            ON roles.department_id = departments.id;`, (err, rows) => {
         if (err) {
             console.log(err);
         }
-        console.table(rows);
+        console.table('Roles', rows);
     });
 };
 
@@ -83,4 +83,4 @@ function viewEmployees() {
 
 
 
-module.exports = viewDepartments;
+module.exports = { viewDepartments, viewRoles };

@@ -1,6 +1,6 @@
 // MODULES
 const inquirer = require('inquirer');
-const viewDepartments = require('./utils/queries');
+const { viewDepartments, viewRoles } = require('./utils/queries');
 
 function initializeApp() {
     console.log(
@@ -98,8 +98,11 @@ function promptMenu() {
                 viewDepartments();
                 confirmNew();
             }
+            if (answers.menu === 1) {
+                viewRoles();
+                confirmNew();
+            }
         })
-    //.then(confirmNew)
 };
 
 function confirmNew() {
