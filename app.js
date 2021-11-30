@@ -1,6 +1,6 @@
 // MODULES
 const inquirer = require('inquirer');
-const { viewDepartments, viewRoles, viewEmployees } = require('./utils/queries');
+const { viewDepartments, viewRoles, viewEmployees, addDepartment, addRole, addEmployee } = require('./utils/queries');
 
 function initializeApp() {
     console.log(
@@ -49,62 +49,132 @@ function promptMenu() {
                 value: 2
             },
             {
-                name: 'View Employees by Department.',
+                name: 'Add a Department.',
                 value: 3
             },
             {
-                name: 'View Employees by Manager.',
+                name: 'Add a Role.',
                 value: 4
             },
             {
-                name: 'Update Employee Manager.',
+                name: 'Add an Employee.',
                 value: 5
             },
             {
-                name: 'Add a Department.',
+                name: 'Update an Employee Role.',
                 value: 6
             },
             {
-                name: 'Add a Role.',
+                name: 'Delete a Department.',
                 value: 7
             },
             {
-                name: 'Add an Employee.',
+                name: 'Delete a Role.',
                 value: 8
             },
             {
-                name: 'Update an Employee Role.',
+                name: 'Delete an Employee.',
                 value: 9
             },
             {
-                name: 'Delete a Department.',
-                value: 10
-            },
-            {
-                name: 'Delete a Role.',
-                value: 11
-            },
-            {
-                name: 'Delete an Employee.',
-                value: 12
-            },
-            {
                 name: 'View Total Utilized Budget.',
-                value: 13
+                value: 10
             }]
         }])
         .then(answers => {
+            // view departments
             if (answers.menu === 0) {
                 viewDepartments();
                 confirmNew();
             }
+            // view roles
             if (answers.menu === 1) {
                 viewRoles();
                 confirmNew();
             }
+            // view employees
             if (answers.menu === 2) {
                 viewEmployees();
                 confirmNew();
+            }
+            // add department
+            if (answers.menu === 3) {
+                return inquirer
+                    .prompt([{
+                        type: 'input',
+                        name: 'id',
+                        message: 'Please enter the Department id number.'
+                    },
+                    {
+                        type: 'input',
+                        name: 'name',
+                        message: 'Please enter the Department name.'
+                    }])
+                    .then(departmentAnswers => {
+                        return addDepartment(departmentAnswers);
+                    })
+                    .then(confirmNew);
+            }
+            // add role
+            if (answers.menu === 4) {
+                return inquirer
+                    .prompt([{
+                        type: 'input',
+                        name: 'id',
+                        message: 'Please enter the Role id number.'
+                    },
+                    {
+                        type: 'input',
+                        name: 'title',
+                        message: 'Please enter the Role title.'
+                    },
+                    {
+                        type: 'input',
+                        name: 'salary',
+                        message: 'Please enter the salary for the Role.'
+                    },
+                    {
+                        type: 'input',
+                        name: 'department_id',
+                        message: 'Please enter the Department id number the Role belongs to.'
+                    }])
+                    .then(roleAnswers => {
+                        return addRole(roleAnswers);
+                    })
+                    .then(confirmNew);
+            }
+            // add employee
+            if (answers.menu === 5) {
+                return inquirer
+                    .prompt([{
+                        type: 'input',
+                        name: 'id',
+                        message: 'Please enter the Employees id number.'
+                    },
+                    {
+                        type: 'input',
+                        name: 'first_name',
+                        message: 'Please enter the Employees first name.'
+                    },
+                    {
+                        type: 'input',
+                        name: 'last_name',
+                        message: 'Please enter the Employees last name.'
+                    },
+                    {
+                        type: 'input',
+                        name: 'role_id',
+                        message: 'Please enter the Employees Role id number.'
+                    },
+                    {
+                        type: 'input',
+                        name: 'manager_id',
+                        message: 'Please enter the Employees Manager id number.'
+                    }])
+                    .then(employeeAnswers => {
+                        return addEmployee(employeeAnswers);
+                    })
+                    .then(confirmNew);
             }
         })
 };

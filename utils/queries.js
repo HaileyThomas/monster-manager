@@ -30,9 +30,9 @@ function viewRoles() {
             INNER JOIN departments
             ON roles.department_id = departments.id;`, (err, rows) => {
         if (err) {
-            console.log(err);
+            return (console.log(err));
         }
-        console.table('Roles', rows);
+        return (console.table('Roles', rows));
     });
 };
 
@@ -45,26 +45,51 @@ function viewEmployees() {
             INNER JOIN departments
             ON roles.department_id = departments.id;`, (err, rows) => {
         if (err) {
-            console.log(err);
+            return (console.log(err));
         }
-        console.table('Employees', rows);
+        return (console.table('Employees', rows));
     });
 };
 
-
-
-
-// create a department
-function createDepartment() {
+// 3 Add a Department
+function addDepartment(departmentAnswers) {
     const sql = `INSERT INTO departments (id, name)
                 VALUES (?, ?)`;
-    //const params = [data here];
+    const params = [departmentAnswers.id, departmentAnswers.name];
 
     db.query(sql, params, (err, result) => {
         if (err) {
-            console.log(err);
+            return (console.log(err));
         }
-        console.table(result);
+        return (console.table(result));
+    });
+};
+
+// 4 Add a Role
+function addRole(roleAnswers) {
+    const sql = `INSERT INTO roles (id, title, salary, department_id)
+                VALUES (?, ?, ?, ?)`;
+    const params = [roleAnswers.id, roleAnswers.title, roleAnswers.salary, roleAnswers.department_id];
+
+    db.query(sql, params, (err, result) => {
+        if (err) {
+            return (console.log(err));
+        }
+        return (console.table(result));
+    });
+};
+
+// 5 Add an Employee
+function addEmployee(employeeAnswers) {
+    const sql = `INSERT INTO employees (id, first_name, last_name, role_id, manager_id)
+                VALUES (?, ?, ?, ?, ?)`;
+    const params = [employeeAnswers.id, employeeAnswers.first_name, employeeAnswers.last_name, employeeAnswers.role_id, employeeAnswers.manager_id];
+
+    db.query(sql, params, (err, result) => {
+        if (err) {
+            return (console.log(err));
+        }
+        return (console.table(result));
     });
 };
 
@@ -86,4 +111,4 @@ function deleteDepartment() {
 
 
 
-module.exports = { viewDepartments, viewRoles, viewEmployees };
+module.exports = { viewDepartments, viewRoles, viewEmployees, addDepartment, addRole, addEmployee };
