@@ -93,17 +93,21 @@ function addEmployee(employeeAnswers) {
     });
 };
 
+// 6 Update Employee Role
+function updateEmployeeRole() {
+    return (console.log("TO DO"));
+};
 
-// delete a department
-function deleteDepartment() {
+// 7 Delete Department
+function deleteDepartment(delDepartmentAnswer) {
     const sql = `DELETE FROM departments WHERE id = ?`;
-    const params = [req.params.id];
+    const params = [delDepartmentAnswer.id];
 
     db.query(sql, params, (err, result) => {
         if (err) {
-            console.log(err);
+            return (console.log(err));
         }
-        console.table(result);
+        return (console.table(result));
     });
 };
 
@@ -111,4 +115,4 @@ function deleteDepartment() {
 
 
 
-module.exports = { viewDepartments, viewRoles, viewEmployees, addDepartment, addRole, addEmployee };
+module.exports = { viewDepartments, viewRoles, viewEmployees, addDepartment, addRole, addEmployee, updateEmployeeRole, deleteDepartment };

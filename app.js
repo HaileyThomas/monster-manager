@@ -1,6 +1,6 @@
 // MODULES
 const inquirer = require('inquirer');
-const { viewDepartments, viewRoles, viewEmployees, addDepartment, addRole, addEmployee } = require('./utils/queries');
+const { viewDepartments, viewRoles, viewEmployees, addDepartment, addRole, addEmployee, updateEmployeeRole, deleteDepartment } = require('./utils/queries');
 
 function initializeApp() {
     console.log(
@@ -173,6 +173,23 @@ function promptMenu() {
                     }])
                     .then(employeeAnswers => {
                         return addEmployee(employeeAnswers);
+                    })
+                    .then(confirmNew);
+            }
+            // update employee role
+            if (answer.menu === 6) {
+                return (updateEmployeeRole);
+            }
+            // delete a department
+            if (answer.menu === 7) {
+                return inquirer
+                    .prompt([{
+                        type: 'input',
+                        name: 'id',
+                        message: 'Please enter the Department id number.'
+                    }])
+                    .then(delDepartmentAnswer => {
+                        return deleteDepartment(delDepartmentAnswer);
                     })
                     .then(confirmNew);
             }
