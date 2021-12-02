@@ -111,8 +111,32 @@ function deleteDepartment(delDepartmentAnswer) {
     });
 };
 
+// 8 Delete Role
+function deleteRole(delRoleAnswer) {
+    const sql = `DELETE FROM roles WHERE id = ?`;
+    const params = [delRoleAnswer.id];
+
+    db.query(sql, params, (err, result) => {
+        if (err) {
+            return (console.log(err));
+        }
+        return (console.table(result));
+    });
+};
+
+// 9 Delete Employee
+function deleteEmployee(delEmployeeAnswer) {
+    const sql = `DELETE FROM roles WHERE id = ?`;
+    const params = [delEmployeeAnswer.id];
+
+    db.query(sql, params, (err, result) => {
+        if (err) {
+            return (console.log(err));
+        }
+        return (console.table(result));
+    });
+};
 
 
 
-
-module.exports = { viewDepartments, viewRoles, viewEmployees, addDepartment, addRole, addEmployee, updateEmployeeRole, deleteDepartment };
+module.exports = { viewDepartments, viewRoles, viewEmployees, addDepartment, addRole, addEmployee, updateEmployeeRole, deleteDepartment, deleteRole, deleteEmployee };

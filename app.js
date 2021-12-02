@@ -1,6 +1,6 @@
 // MODULES
 const inquirer = require('inquirer');
-const { viewDepartments, viewRoles, viewEmployees, addDepartment, addRole, addEmployee, updateEmployeeRole, deleteDepartment } = require('./utils/queries');
+const { viewDepartments, viewRoles, viewEmployees, addDepartment, addRole, addEmployee, updateEmployeeRole, deleteDepartment, deleteRole, deleteEmployee } = require('./utils/queries');
 
 function initializeApp() {
     console.log(
@@ -177,11 +177,11 @@ function promptMenu() {
                     .then(confirmNew);
             }
             // update employee role
-            if (answer.menu === 6) {
+            if (answers.menu === 6) {
                 return (updateEmployeeRole);
             }
             // delete a department
-            if (answer.menu === 7) {
+            if (answers.menu === 7) {
                 return inquirer
                     .prompt([{
                         type: 'input',
@@ -190,6 +190,32 @@ function promptMenu() {
                     }])
                     .then(delDepartmentAnswer => {
                         return deleteDepartment(delDepartmentAnswer);
+                    })
+                    .then(confirmNew);
+            }
+            // delete a role
+            if (answers.menu === 8) {
+                return inquirer
+                    .prompt([{
+                        type: 'input',
+                        name: 'id',
+                        message: 'Please enter the Role id number.'
+                    }])
+                    .then(delRoleAnswer => {
+                        return deleteRole(delRoleAnswer);
+                    })
+                    .then(confirmNew);
+            }
+            // delete an employee
+            if (answers.menu === 9) {
+                return inquirer
+                    .prompt([{
+                        type: 'input',
+                        name: 'id',
+                        message: 'Please enter the Employees id number.'
+                    }])
+                    .then(delEmployeeAnswer => {
+                        return deleteEmployee(delEmployeeAnswer);
                     })
                     .then(confirmNew);
             }
