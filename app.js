@@ -1,6 +1,6 @@
 // MODULES
 const inquirer = require('inquirer');
-const { viewDepartments, viewRoles, viewEmployees, addDepartment, addRole, addEmployee, updateEmployeeRole, deleteDepartment, deleteRole, deleteEmployee } = require('./utils/queries');
+const { viewDepartments, viewRoles, viewEmployees, addDepartment, addRole, addEmployee, updateEmployeeRole, deleteDepartment, deleteRole, deleteEmployee, viewBudget } = require('./utils/queries');
 
 function initializeApp() {
     console.log(
@@ -232,6 +232,11 @@ function promptMenu() {
                         return deleteEmployee(delEmployeeAnswer);
                     })
                     .then(confirmNew);
+            }
+            // view budget
+            if (answers.menu === 10) {
+                viewBudget();
+                confirmNew();
             }
         })
 };

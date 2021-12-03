@@ -147,6 +147,15 @@ function deleteEmployee(delEmployeeAnswer) {
     });
 };
 
+// 10 View Budget
+function viewBudget() {
+    db.query(`SELECT SUM(salary) FROM roles`, (err, rows) => {
+        if (err) {
+            return (console.log(err));
+        }
+        return (console.table('Total Budget', rows));
+    });
+}
 
 
-module.exports = { viewDepartments, viewRoles, viewEmployees, addDepartment, addRole, addEmployee, updateEmployeeRole, deleteDepartment, deleteRole, deleteEmployee };
+module.exports = { viewDepartments, viewRoles, viewEmployees, addDepartment, addRole, addEmployee, updateEmployeeRole, deleteDepartment, deleteRole, deleteEmployee, viewBudget };
