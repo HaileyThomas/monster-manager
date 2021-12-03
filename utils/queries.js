@@ -94,8 +94,18 @@ function addEmployee(employeeAnswers) {
 };
 
 // 6 Update Employee Role
-function updateEmployeeRole() {
-    return (console.log("TO DO"));
+function updateEmployeeRole(updateEmployeeAnswer) {
+    const sql = `UPDATE employees
+                SET role_id = ?
+                WHERE id = ?`;
+    const params = [updateEmployeeAnswer.role_id, updateEmployeeAnswer.id];
+
+    db.query(sql, params, (err, result) => {
+        if (err) {
+            return (console.log(err));
+        }
+        return (console.table(result));
+    });
 };
 
 // 7 Delete Department

@@ -178,7 +178,21 @@ function promptMenu() {
             }
             // update employee role
             if (answers.menu === 6) {
-                return (updateEmployeeRole);
+                return inquirer
+                    .prompt([{
+                        type: 'input',
+                        name: 'id',
+                        message: 'Please enter the Employees id number.'
+                    },
+                    {
+                        type: 'input',
+                        name: 'role_id',
+                        message: 'Please enter the Employees new Role id number.'
+                    }])
+                    .then(updateEmployeeAnswer => {
+                        return updateEmployeeRole(updateEmployeeAnswer);
+                    })
+                    .then(confirmNew);
             }
             // delete a department
             if (answers.menu === 7) {
